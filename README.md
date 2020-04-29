@@ -7,6 +7,7 @@
 
 ## Special Thanks
 
-@nikhilweee https://gist.github.com/nikhilweee/9efd9731880104dd00ecf2ed8effacc5
+@nikhilweee [CODE](https://gist.github.com/nikhilweee/9efd9731880104dd00ecf2ed8effacc5)
 
-@anmolrajpal https://github.com/anmolrajpal/vehicle-info
+@anmolrajpal [REPO](https://github.com/anmolrajpal/vehicle-info)
+
