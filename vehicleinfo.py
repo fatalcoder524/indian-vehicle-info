@@ -37,12 +37,30 @@ iresponse = requests.get("https://parivahan.gov.in"+img_test['src'])
 img = Image.open(BytesIO(iresponse.content))
 img.save("downloadedpng.png")
 
+def resolve(img):
+	enhancedImage = enhance()
+	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
+	return pytesseract.image_to_string(enhancedImage, config=custom_config)
+
+def enhance():
+	img = cv2.imread('downloadedpng.png', 0)
+	kernel = np.ones((2,2), np.uint8)
+	img_erosion = cv2.erode(img, kernel, iterations=1)
+	img_dilation = cv2.dilate(img, kernel, iterations=1)
+	erosion_again = cv2.erode(img_dilation, kernel, iterations=1)
+	final = cv2.GaussianBlur(erosion_again, (1, 1), 0)
+	return final
+	
 print('Resolving Captcha')
-captcha_text = pytesseract.image_to_string(Image.open('downloadedpng.png'))
+img = cv2.imread('downloadedpng.png')
+
+captcha_text = resolve(img)
+#pytesseract.image_to_string(img, config=custom_config,lang='eng')
 extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 print("OCR Result => ", extracted_text)
-print(extracted_text)
-extracted_text=input("Enter Captcha: ")
+ans=input("Is the Captcha correct? (Y/N): ")
+if(ans=='N' or ans=='n'):
+	extracted_text=input("Enter the Captcha: ")
 
 data = {
     'javax.faces.partial.ajax':'true',
