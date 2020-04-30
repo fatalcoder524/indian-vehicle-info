@@ -22,6 +22,18 @@ app.config['TEMP_FOLDER'] = '/tmp'
 pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
 post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
+r = session.get(url=home_url,headers=my_headers)
+cookies = r.cookies
+soup = BeautifulSoup(r.text, 'html.parser')
+viewstate = soup.select('input[name="javax.faces.ViewState"]')[0]['value']
+button = soup.find("button",{"type": "submit"})	
+img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
+iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
+img = Image.open(BytesIO(iresponse.content))
+img.save(os.path.join("/tmp/","downloadedpng.jpg"))
+buffered = BytesIO(iresponse.content)
+img.save(buffered, format="JPEG")
+img_str = base64.b64encode(buffered.getvalue())
 def resolve():
 	enhancedImage = enhance()
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
@@ -34,25 +46,13 @@ def enhance():
 	img_dilation = cv2.dilate(img_erosion, kernel, iterations=1)
 	erosion_again = cv2.erode(img_dilation, kernel, iterations=1)
 	final = cv2.GaussianBlur(erosion_again, (1, 1), 0)
-	cv2.imwrite("Captcha.jpg",final)
+	cv2.imwrite("/tmp/Captcha.jpg",final)
 	return final
 
 @app.route("/")
 def home_view():
 	session = requests.Session()
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
-	r = session.get(url=home_url,headers=my_headers)
-	cookies = r.cookies
-	soup = BeautifulSoup(r.text, 'html.parser')
-	viewstate = soup.select('input[name="javax.faces.ViewState"]')[0]['value']
-	button = soup.find("button",{"type": "submit"})	
-	img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
-	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
-	img = Image.open(BytesIO(iresponse.content))
-	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
-	buffered = BytesIO(iresponse.content)
-	img.save(buffered, format="JPEG")
-	img_str = base64.b64encode(buffered.getvalue())
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	captcha_text = resolve()
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
@@ -61,6 +61,18 @@ def home_view():
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
+	data = {
+    'javax.faces.partial.ajax':'true',
+    'javax.faces.source': button['id'],
+    'javax.faces.partial.execute':'@all',
+    'javax.faces.partial.render': 'form_rcdl:pnl_show form_rcdl:pg_show form_rcdl:rcdl_pnl',
+    button['id']:button['id'],
+    'form_rcdl':'form_rcdl',
+    'form_rcdl:tf_reg_no1': first,
+    'form_rcdl:tf_reg_no2': second,
+	'form_rcdl:j_idt34:CaptchaID':extracted_text,
+    'javax.faces.ViewState': viewstate
+}
 	if request.method == 'POST':
 		file = request.files['file']
 		hocr = request.form.get('hocr') or ''
