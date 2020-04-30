@@ -17,6 +17,7 @@ from urllib.request import urlretrieve
 from io import BytesIO
 
 app = Flask(__name__) 
+app.config['TEMP_FOLDER'] = '/tmp'
 pytesseract.pytesseract.tesseract_cmd = r'tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
 post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
@@ -47,12 +48,14 @@ def home_view():
 	img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
 	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
 	img = Image.open(BytesIO(iresponse.content))
-	img.save("downloadedpng.png")
+	folder = os.path.join(app.config['TEMP_FOLDER'], str(os.getpid()))
+	os.mkdir(folder)
+	img.save(os.path.join(folder,"downloadedpng.png"))
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	# captcha_text = resolve()
 	# extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 	extracted_text ="test4"
-	return render_template("index.html",imglink="downloadedpng.png",captchaText=extracted_text)
+	return render_template("index.html",imglink=folder+"downloadedpng.png",captchaText=extracted_text)
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
