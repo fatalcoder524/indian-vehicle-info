@@ -107,11 +107,9 @@ def result():
 		soup = BeautifulSoup(r.text, 'html.parser')
 		table = SoupStrainer('tr')
 		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
-		resp = jsonify( {
-			u'status': 200,
-			u'details':soup.get_text(),
-			u'details2':str(soup.encode("utf-8"),"utf-8")
-				} )
-		return """<table class='table table-responsive table-striped table-condensed table-bordered' border='1'>
-		"""+str(soup)+"""
-		</table>"""
+		if str(soup):
+			return """<table class='table table-responsive table-striped table-condensed table-bordered' border='1'>
+			"""+str(soup)+"""
+			</table>"""
+		else:
+			return "Captcha Wrong or Vehicle does not exist!!!! "
