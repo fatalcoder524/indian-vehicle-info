@@ -1,4 +1,4 @@
-from flask import Flask , render_template,session
+from flask import Flask , render_template,session,request
 import pytesseract
 import sys
 import re
