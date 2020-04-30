@@ -1,6 +1,6 @@
 # indian-vehicle-info
 
-## INTRODUCTION
+## Introduction
 
 With the increasing forgery cases, identity verification via one means or the other has become quite crucial. Therefore, the government and industry regulations make sure that the businesses carry out proper identity authentication of their customers to avoid any kind of identity theft. Vehicles are issued a Registration Certificate (RC) which holds the basic information about the owner and the vehicle itself. Before trusting an individual, we need to check the identity of any individual which can be easily done by Registration Certificate Check. This can be done by authenticating the basic information provided on the RC ensuring that the vehicle is registered with the Regional Transport Office (RTO) authorities and legalizes the owner.
 
