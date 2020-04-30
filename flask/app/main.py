@@ -110,6 +110,6 @@ def result():
 		resp = jsonify( {
 			u'status': 200,
 			u'details':soup.get_text(),
-			u'details2':soup
+			u'details2':str(soup.encode("utf-8"),"utf-8")
 				} )
 		return resp
