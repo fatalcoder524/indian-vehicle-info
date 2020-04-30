@@ -51,8 +51,8 @@ def home_view():
 	img = Image.open(BytesIO(iresponse.content))
 	img.save("downloadedpng.png")
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
-	captcha_text = resolve()
-	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
+	# captcha_text = resolve()
+	# extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 	return render_template("index.html",imglink="downloadedpng.png",captchaText=extracted_text)
 
 @app.route('/result',methods = ['POST', 'GET'])
