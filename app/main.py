@@ -23,7 +23,7 @@ post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
 
 
 @app.route("/")
-def resolve(img):
+def resolve():
 	enhancedImage = enhance()
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	return pytesseract.image_to_string(enhancedImage, config=custom_config)
@@ -51,7 +51,7 @@ def home_view():
 	img = Image.open(BytesIO(iresponse.content))
 	img.save("downloadedpng.png")
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
-	captcha_text = resolve(img)
+	captcha_text = resolve()
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 	return render_template("index.html",imglink="downloadedpng.png",captchaText=extracted_text)
 
