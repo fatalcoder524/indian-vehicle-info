@@ -49,11 +49,13 @@ def home_view():
 	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
 	img = Image.open(BytesIO(iresponse.content))
 	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
+	contents = img.getvalue().encode("base64")
+	contents = contents.split('\n')[0]
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	captcha_text = resolve()
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 	#extracted_text ="test4"
-	return render_template("index.html",imglink=img,captchaText=extracted_text)
+	return render_template("index.html",imglink=contents,captchaText=extracted_text)
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
