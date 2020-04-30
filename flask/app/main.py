@@ -76,9 +76,13 @@ def result():
 	global ses
 	if request.method == 'POST':
 		if not request.form['first']:
-			request.form['first']="MH47K"
+			first="MH47K"
+		else:
+			first=request.form['first']
 		if not request.form['second']:
-			request.form['second']="4272"
+			second="4272"
+		else:
+			second=request.form['second']
 		data = {
 			'javax.faces.partial.ajax':'true',
 			'javax.faces.source': session.get("button",None),
@@ -86,8 +90,8 @@ def result():
 			'javax.faces.partial.render': 'form_rcdl:pnl_show form_rcdl:pg_show form_rcdl:rcdl_pnl',
 			session.get("button",None):session.get("button",None),
 			'form_rcdl':'form_rcdl',
-			'form_rcdl:tf_reg_no1': request.form['first'],
-			'form_rcdl:tf_reg_no2': request.form['second'],
+			'form_rcdl:tf_reg_no1': first,
+			'form_rcdl:tf_reg_no2': second,
 			'form_rcdl:j_idt34:CaptchaID':request.form['captcha'],
 			'javax.faces.ViewState': session.get("viewstate",None)
 			}
