@@ -18,6 +18,7 @@ from io import BytesIO
 
 app = Flask(__name__) 
 app.config['TEMP_FOLDER'] = '/tmp'
+pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
 post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
 def resolve():
