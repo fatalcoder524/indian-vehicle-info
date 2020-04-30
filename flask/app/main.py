@@ -105,11 +105,13 @@ def result():
 		sleep(2.0)
 		r = ses.post(url=post_url, data=data, headers=headers,cookies=cookies)
 		soup = BeautifulSoup(r.text, 'html.parser')
-		table = SoupStrainer('table')
+		table = SoupStrainer('tr')
 		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
 		resp = jsonify( {
 			u'status': 200,
 			u'details':soup.get_text(),
 			u'details2':str(soup.encode("utf-8"),"utf-8")
 				} )
-		return str(soup)
+		return """<table class='table table-responsive table-striped table-condensed table-bordered' border='1'>
+		{{str(soup)}}
+		</table>"""
