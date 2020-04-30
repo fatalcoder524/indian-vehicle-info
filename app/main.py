@@ -51,7 +51,7 @@ def home_view():
 	img = Image.open(BytesIO(iresponse.content))
 	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
 	buffered = BytesIO(iresponse.content)
-	image.save(buffered, format="JPEG")
+	img.save(buffered, format="JPEG")
 	img_str = base64.b64encode(buffered.getvalue())
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	captcha_text = resolve()
