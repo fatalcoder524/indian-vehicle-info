@@ -45,7 +45,7 @@ def home_view():
 	global ses
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
 	r = ses.get(url=home_url,headers=my_headers)
-	if r.cookies['JSESSIONID']:
+	if r.cookies:
 		cookies=r.cookies['JSESSIONID']
 	else:
 		cookies=""
