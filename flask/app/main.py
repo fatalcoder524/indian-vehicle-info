@@ -112,4 +112,4 @@ def result():
 			u'details':soup.get_text(),
 			u'details2':str(soup.encode("utf-8"),"utf-8")
 				} )
-		return resp
+		return str(soup)
