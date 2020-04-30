@@ -7,7 +7,7 @@ import requests
 import cv2
 import json 
 import numpy as np
-import StringIO
+from io import StringIO
 from time import sleep
 try:
     import Image
