@@ -20,6 +20,7 @@ from io import BytesIO
 app = Flask(__name__) 
 app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
 ses = requests.Session()
+ses.config['keep_alive'] = False
 app.config['TEMP_FOLDER'] = '/tmp'
 pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
