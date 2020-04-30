@@ -122,7 +122,7 @@ def result():
 		table = SoupStrainer('tr')
 		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
 		if str(soup):
-			return """<table class='table table-responsive table-striped table-condensed table-bordered' border='1'>
+			return """<h1 align="center">Registration Details</h1><table class='table table-responsive table-striped table-condensed table-bordered' border='1'>
 			"""+str(soup)+"""
 			</table>"""
 		else:
