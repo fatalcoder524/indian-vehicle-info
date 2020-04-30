@@ -41,9 +41,9 @@ def enhance():
 
 @app.route("/")
 def home_view():
-	session = requests.Session()
+	ses = requests.Session()
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
-	r = session.get(url=home_url,headers=my_headers)
+	r = ses.get(url=home_url,headers=my_headers)
 	cookies = r.cookies
 	session["cookies"]=cookies
 	soup = BeautifulSoup(r.text, 'html.parser')
@@ -100,7 +100,7 @@ def result():
 		# MARK: Added delay
 		sleep(2.0)
 
-		r = requests.post(url=post_url, data=data, headers=headers, cookies=cookies)
+		r = ses.post(url=post_url, data=data, headers=headers, cookies=cookies)
 		soup = BeautifulSoup(r.text, 'html.parser')
 		table = SoupStrainer('tr')
 		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
