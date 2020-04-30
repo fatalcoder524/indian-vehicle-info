@@ -19,6 +19,7 @@ from io import BytesIO
 
 app = Flask(__name__) 
 app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
+ses = requests.Session()
 app.config['TEMP_FOLDER'] = '/tmp'
 pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
@@ -41,8 +42,7 @@ def enhance():
 
 @app.route("/")
 def home_view():
-	global cookies
-	ses = requests.Session()
+	global cookies,ses
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
 	r = ses.get(url=home_url,headers=my_headers)
 	cookies=r.cookies
@@ -66,7 +66,7 @@ def home_view():
 	
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
-	global cookies
+	global cookies,ses
 	if request.method == 'POST':
 		data = {
 			'javax.faces.partial.ajax':'true',
