@@ -27,7 +27,7 @@ post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
 
 def resolve():
 	enhancedImage = enhance()
-	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
+	custom_config = r'--oem 1 --psm 8 alphanumeric'
 	return pytesseract.image_to_string(enhancedImage, config=custom_config)
 
 def enhance():
