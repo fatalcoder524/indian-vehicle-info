@@ -24,7 +24,7 @@ app.config['TEMP_FOLDER'] = '/tmp'
 pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
 post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
-cookies=""
+cookies=[]
 def resolve():
 	enhancedImage = enhance()
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
@@ -100,7 +100,6 @@ def result():
 		print(cookies)
 		# MARK: Added delay
 		sleep(2.0)
-
 		r = ses.post(url=post_url, data=data, headers=headers, cookies=cookies)
 		soup = BeautifulSoup(r.text, 'html.parser')
 		table = SoupStrainer('tr')
