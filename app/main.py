@@ -48,9 +48,7 @@ def home_view():
 	img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
 	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
 	img = Image.open(BytesIO(iresponse.content))
-	folder = os.path.join("/tmp/", str(os.getpid()))
-	os.mkdir(folder)
-	img.save(os.path.join(folder,"downloadedpng.png"))
+	img.save(os.path.join("/tmp/","downloadedpng.png"))
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	# captcha_text = resolve()
 	# extracted_text = captcha_text.replace(" ", "").replace("\n", "")
