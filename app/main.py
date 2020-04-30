@@ -54,49 +54,49 @@ def home_view():
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
-   if request.method == 'POST':
-    file = request.files['file']
-    hocr = request.form.get('hocr') or ''
-    ext = '.hocr' if hocr else '.txt'
-    if file and allowed_file(file.filename):
-      folder = os.path.join(app.config['TEMP_FOLDER'], str(os.getpid()))
-      os.mkdir(folder)
-      input_file = os.path.join(folder, secure_filename(file.filename))
-      output_file = os.path.join(folder, app.config['OCR_OUTPUT_FILE'])
-      file.save(input_file)
+	if request.method == 'POST':
+		file = request.files['file']
+		hocr = request.form.get('hocr') or ''
+		ext = '.hocr' if hocr else '.txt'
+		if file and allowed_file(file.filename):
+			folder = os.path.join(app.config['TEMP_FOLDER'], str(os.getpid()))
+			os.mkdir(folder)
+			input_file = os.path.join(folder, secure_filename(file.filename))
+			output_file = os.path.join(folder, app.config['OCR_OUTPUT_FILE'])
+			file.save(input_file)
 
-      command = ['tesseract', input_file, output_file, '-l', request.form['lang'], hocr]
-      proc = subprocess.Popen(command, stderr=subprocess.PIPE)
-      proc.wait()
+			command = ['tesseract', input_file, output_file, '-l', request.form['lang'], hocr]
+			proc = subprocess.Popen(command, stderr=subprocess.PIPE)
+			proc.wait()
 
-      output_file += ext
+			output_file += ext
 
-      if os.path.isfile(output_file):
-        f = open(output_file)
-        resp = jsonify( {
-          u'status': 200,
-          u'ocr':{k:v.decode('utf-8') for k,v in enumerate(f.read().splitlines())}
-        } )
-      else:
-        resp = jsonify( {
-          u'status': 422,
-          u'message': u'Unprocessable Entity'
-        } )
-        resp.status_code = 422
+			if os.path.isfile(output_file):
+				f = open(output_file)
+				resp = jsonify( {
+				  u'status': 200,
+				  u'ocr':{k:v.decode('utf-8') for k,v in enumerate(f.read().splitlines())}
+				} )
+			else:
+				resp = jsonify( {
+				  u'status': 422,
+				  u'message': u'Unprocessable Entity'
+				} )
+				resp.status_code = 422
 
-      shutil.rmtree(folder)
-      return resp
-    else:
-      resp = jsonify( { 
-        u'status': 415,
-        u'message': u'Unsupported Media Type' 
-      } )
-      resp.status_code = 415
-      return resp
-  else:
-    resp = jsonify( { 
-      u'status': 405, 
-      u'message': u'The method is not allowed for the requested URL' 
-    } )
-    resp.status_code = 405
-    return resp
+				shutil.rmtree(folder)
+				return resp
+		else:
+			resp = jsonify( { 
+			u'status': 415,
+			u'message': u'Unsupported Media Type' 
+			} )
+			resp.status_code = 415
+			return resp
+	else:
+		resp = jsonify( { 
+		  u'status': 405, 
+		  u'message': u'The method is not allowed for the requested URL' 
+		} )
+		resp.status_code = 405
+		return resp
