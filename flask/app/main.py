@@ -122,8 +122,12 @@ def result():
 		table = SoupStrainer('tr')
 		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
 		if str(soup):
-			return """<h1 align="center">Registration Details</h1><table class='table table-responsive table-striped table-condensed table-bordered' border='1'>
+			return """<h1 align="center">Registration Details</h1><table align="center" class='table table-responsive table-striped table-condensed table-bordered' border='1'>
 			"""+str(soup)+"""
-			</table>"""
+			</table>
+			<marquee direction="right">
+	Developed by <a href="https://github.com/fatalcoder524">fatalcoder524</a>
+	</marquee>
+			"""
 		else:
 			return "Captcha Wrong or Vehicle does not exist!!!! "
