@@ -18,7 +18,7 @@ With the increasing forgery cases, identity verification via one means or the ot
 * Change `pytesseract.pytesseract.tesseract_cmd` value in `vehicleinfo.py` to `tesseract` path.
 * Install bs4, pytesseract and OpenCV.
 ```
-pip install opencv-python bs4 pytesseract
+pip install -r requirements.txt
 ```
 
 ## Usage
