@@ -5,9 +5,9 @@ import re
 import os
 import requests
 import cv2
+import base64
 import json 
 import numpy as np
-from io import StringIO
 from time import sleep
 try:
     import Image
@@ -50,16 +50,14 @@ def home_view():
 	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
 	img = Image.open(BytesIO(iresponse.content))
 	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
-	output = StringIO()
-	img.save(output, "PNG")
-	contents = output.getvalue().encode("base64")
-	output.close()
-	contents = contents.split('\n')[0]
+	buffered = BytesIO(iresponse.content)
+	image.save(buffered, format="JPEG")
+	img_str = base64.b64encode(buffered.getvalue())
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	captcha_text = resolve()
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 	#extracted_text ="test4"
-	return render_template("index.html",imglink=contents,captchaText=extracted_text)
+	return render_template("index.html",imglink=img_str,captchaText=extracted_text)
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
