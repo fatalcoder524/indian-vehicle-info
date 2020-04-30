@@ -50,7 +50,7 @@ def home_view():
 		session["cookies"]=cookies
 	except KeyError:
 		if session.get("cookies",None):
-			cookies=session.get("button",None)
+			cookies=session.get("cookies",None)
 		else:
 			r = ses.get(url=home_url,headers=my_headers)
 			cookies=r.cookies['JSESSIONID']
