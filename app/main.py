@@ -25,6 +25,7 @@ pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
 post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
 cookies=""
+
 def resolve():
 	enhancedImage = enhance()
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
@@ -42,7 +43,7 @@ def enhance():
 
 @app.route("/")
 def home_view():
-	global cookies,ses
+	global ses
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
 	r = ses.get(url=home_url,headers=my_headers)
 	cookies=r.cookies['JSESSIONID']
@@ -62,11 +63,11 @@ def home_view():
 	captcha_text = resolve()
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 	#extracted_text ="test4"
-	return render_template("index.html",imglink="data:image/png;base64,"+img_str.decode("utf-8"),captchaText=extracted_text)
+	return render_template("index.html",cookies=cookies,imglink="data:image/png;base64,"+img_str.decode("utf-8"),captchaText=extracted_text)
 	
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
-	global cookies,ses
+	global ses
 	if request.method == 'POST':
 		data = {
 			'javax.faces.partial.ajax':'true',
@@ -88,7 +89,7 @@ def result():
 			'Host': 'parivahan.gov.in',
 			'DNT': '1',
 			'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15',
-			'Cookie': 'JSESSIONID=%s; has_js=1' % cookies,
+			'Cookie': 'JSESSIONID=%s; has_js=1' % request.form['JSESSIONID'],
 			'X-Requested-With':'XMLHttpRequest',
 			'Faces-Request':'partial/ajax',
 			'Origin':'https://parivahan.gov.in',
@@ -107,7 +108,7 @@ def result():
 		resp = jsonify( {
 			u'status': 200,
 			u'details':soup.get_text(),
-			u'cookies':cookies,
+			u'cookies':request.form['JSESSIONID'],
 			u'data':data,
 			u'headers':headers
 				} )
