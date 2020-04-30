@@ -7,6 +7,7 @@ import requests
 import cv2
 import json 
 import numpy as np
+import StringIO
 from time import sleep
 try:
     import Image
@@ -49,7 +50,10 @@ def home_view():
 	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
 	img = Image.open(BytesIO(iresponse.content))
 	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
-	contents = BytesIO(iresponse.content).getvalue().encode("base64")
+	output = StringIO.StringIO()
+	img.save(output, "JPG")
+	contents = output.getvalue().encode("base64")
+	output.close()
 	contents = contents.split('\n')[0]
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	captcha_text = resolve()
