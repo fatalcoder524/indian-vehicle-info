@@ -113,5 +113,5 @@ def result():
 			u'details2':str(soup.encode("utf-8"),"utf-8")
 				} )
 		return """<table class='table table-responsive table-striped table-condensed table-bordered' border='1'>
-		str(soup)
+		"""+str(soup)+"""
 		</table>"""
