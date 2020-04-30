@@ -106,13 +106,11 @@ def result():
 		r = ses.post(url=post_url, data=data, headers=headers,cookies=cookies)
 		soup = BeautifulSoup(r.text, 'html.parser')
 		table = SoupStrainer('table')
-		test1=soup.find("table").get_text()
 		test2=soup.find("table")
 		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
 		resp = jsonify( {
 			u'status': 200,
 			u'details':soup.get_text(),
-			u'details2':test1,
 			u'details3':test2
 				} )
 		return resp
