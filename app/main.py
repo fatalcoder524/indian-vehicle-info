@@ -1,4 +1,6 @@
 from flask import Flask , render_template
+import pytesseract
+import sys
 import re
 import os
 import requests
