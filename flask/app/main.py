@@ -111,4 +111,4 @@ def result():
 			u'status': 200,
 			u'details':soup.get_text()
 				} )
-		return resp
+		return soup
