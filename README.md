@@ -28,6 +28,11 @@ pip install -r requirements.txt
 * Close the captcha window or press any key on captcha window to continue with the script.
 * If the Captcha didn't match, then enter the correct Captcha.
 
+## Deploy Flask App to Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+
 ## Special Thanks
 
 @nikhilweee [CODE](https://gist.github.com/nikhilweee/9efd9731880104dd00ecf2ed8effacc5)
