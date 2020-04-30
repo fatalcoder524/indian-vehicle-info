@@ -24,7 +24,7 @@ app.config['TEMP_FOLDER'] = '/tmp'
 pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
 post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
-cookies=None
+cookies=""
 def resolve():
 	enhancedImage = enhance()
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
