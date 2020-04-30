@@ -5,6 +5,7 @@
     "Tesseract",
     "OCR"
   ],
+  "repository": "https://github.com/fatalcoder524/indian-vehicle-info"
   "success_url": "/",
   "buildpacks": [
     {
