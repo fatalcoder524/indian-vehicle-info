@@ -46,22 +46,29 @@ def enhance():
 	img = cv2.imread('downloadedpng.png', 0)
 	kernel = np.ones((2,2), np.uint8)
 	img_erosion = cv2.erode(img, kernel, iterations=1)
-	img_dilation = cv2.dilate(img, kernel, iterations=1)
+	img_dilation = cv2.dilate(img_erosion, kernel, iterations=1)
 	erosion_again = cv2.erode(img_dilation, kernel, iterations=1)
 	final = cv2.GaussianBlur(erosion_again, (1, 1), 0)
+	cv2.imwrite("Captcha.png",final)
 	return final
 	
 print('Resolving Captcha')
-img = cv2.imread('downloadedpng.png')
 
 captcha_text = resolve(img)
 #pytesseract.image_to_string(img, config=custom_config,lang='eng')
 extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 print("OCR Result => ", extracted_text)
+if os.path.exists("downloadedpng.png"):
+	os.remove("downloadedpng.png")
+cv2.imshow("Captcha",cv2.imread("Captcha.png"))
+cv2.waitKey(0)
 ans=input("Is the Captcha correct? (Y/N): ")
 if(ans=='N' or ans=='n'):
 	extracted_text=input("Enter the Captcha: ")
 
+if os.path.exists("Captcha.png"):
+  os.remove("Captcha.png")
+  
 data = {
     'javax.faces.partial.ajax':'true',
     'javax.faces.source': button['id'],
