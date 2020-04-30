@@ -47,9 +47,13 @@ def home_view():
 	r = ses.get(url=home_url,headers=my_headers)
 	try:
 		cookies=r.cookies['JSESSIONID']
+		session["cookies"]=cookies
 	except KeyError:
-		r = ses.get(url=home_url,headers=my_headers)
-		cookies=r.cookies['JSESSIONID']
+		if session.get("cookies",None):
+			cookies=session.get("button",None)
+		else:
+			r = ses.get(url=home_url,headers=my_headers)
+			cookies=r.cookies['JSESSIONID']
 	soup = BeautifulSoup(r.text, 'html.parser')
 	viewstate = soup.select('input[name="javax.faces.ViewState"]')[0]['value']
 	session["viewstate"]=viewstate
