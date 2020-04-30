@@ -32,6 +32,23 @@ pip install -r requirements.txt
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+## Configuration [Flask App]
+
+* If any error occurs, check the logs using `heroku logs --tail`.
+
+* Any errors related to tessdata, change `TESSDATA_PREFIX` in `Settings/Config Vars` in Heroku Dashboard. Default value is `./.apt/usr/share/tesseract-ocr/4.00/tessdata`. 
+
+* To find the value for your app, run heroku bash using `heroku run bash` and execute `find -iname tessdata`.Copy this and paste it in Config Vars.
+
+## How to use
+Let us assume you have deployed this app in Heroku and you called it `your-heroku-app`.
+
+The app provides a web client `https://your-heroku-app.herokuapp.com/` and `https://your-heroku-app.herokuapp.com/result` will have the result.
+
+This app is available at https://vehicle-info.herokuapp.com/.
+
+## Licence
+MIT Licence. Copyright (c) 2020 Suraj J Pai
 
 ## Special Thanks
 
@@ -60,3 +77,13 @@ indian vehicle registration details web scrapper
 vehicle registration details web scrapper
 
 vehicle registration details api
+
+vehicle registration details flask app
+
+indian vehicle registration details flask app
+
+indian rto flask app
+
+indian vehicle details flask app
+
+rto flask app
