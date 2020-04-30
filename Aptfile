@@ -1,4 +1,4 @@
-:repo:deb http://security.ubuntu.com/ubuntu xenial-security main
+:repo:deb http://security.ubuntu.com/ubuntu xenial main
 libsm6
 libxrender1
 libfontconfig1
