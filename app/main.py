@@ -50,7 +50,7 @@ def home_view():
 	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
 	img = Image.open(BytesIO(iresponse.content))
 	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
-	output = StringIO.StringIO()
+	output = StringIO()
 	img.save(output, "JPG")
 	contents = output.getvalue().encode("base64")
 	output.close()
