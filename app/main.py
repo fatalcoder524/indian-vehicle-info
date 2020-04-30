@@ -1,4 +1,4 @@
-from flask import Flask , render_template
+from flask import Flask , render_template,session
 import pytesseract
 import sys
 import re
@@ -18,22 +18,12 @@ from urllib.request import urlretrieve
 from io import BytesIO
 
 app = Flask(__name__) 
+app.secret_key = 'dljsaklqk24e21cjn!Ew@@dsa5'
 app.config['TEMP_FOLDER'] = '/tmp'
 pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
 post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
-r = session.get(url=home_url,headers=my_headers)
-cookies = r.cookies
-soup = BeautifulSoup(r.text, 'html.parser')
-viewstate = soup.select('input[name="javax.faces.ViewState"]')[0]['value']
-button = soup.find("button",{"type": "submit"})	
-img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
-iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
-img = Image.open(BytesIO(iresponse.content))
-img.save(os.path.join("/tmp/","downloadedpng.jpg"))
-buffered = BytesIO(iresponse.content)
-img.save(buffered, format="JPEG")
-img_str = base64.b64encode(buffered.getvalue())
+
 def resolve():
 	enhancedImage = enhance()
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
@@ -53,6 +43,21 @@ def enhance():
 def home_view():
 	session = requests.Session()
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
+	r = session.get(url=home_url,headers=my_headers)
+	cookies = r.cookies
+	session["cookies"]=cookies
+	soup = BeautifulSoup(r.text, 'html.parser')
+	viewstate = soup.select('input[name="javax.faces.ViewState"]')[0]['value']
+	session["viewstate"]=viewstate
+	button = soup.find("button",{"type": "submit"})	
+	img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
+	session["button"]=button['id']
+	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
+	img = Image.open(BytesIO(iresponse.content))
+	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
+	buffered = BytesIO(iresponse.content)
+	img.save(buffered, format="JPEG")
+	img_str = base64.b64encode(buffered.getvalue())
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	captcha_text = resolve()
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
@@ -61,61 +66,46 @@ def home_view():
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
-	data = {
-    'javax.faces.partial.ajax':'true',
-    'javax.faces.source': button['id'],
-    'javax.faces.partial.execute':'@all',
-    'javax.faces.partial.render': 'form_rcdl:pnl_show form_rcdl:pg_show form_rcdl:rcdl_pnl',
-    button['id']:button['id'],
-    'form_rcdl':'form_rcdl',
-    'form_rcdl:tf_reg_no1': first,
-    'form_rcdl:tf_reg_no2': second,
-	'form_rcdl:j_idt34:CaptchaID':extracted_text,
-    'javax.faces.ViewState': viewstate
-}
 	if request.method == 'POST':
-		file = request.files['file']
-		hocr = request.form.get('hocr') or ''
-		ext = '.hocr' if hocr else '.txt'
-		if file and allowed_file(file.filename):
-			folder = os.path.join(app.config['TEMP_FOLDER'], str(os.getpid()))
-			os.mkdir(folder)
-			input_file = os.path.join(folder, secure_filename(file.filename))
-			output_file = os.path.join(folder, app.config['OCR_OUTPUT_FILE'])
-			file.save(input_file)
+		data = {
+			'javax.faces.partial.ajax':'true',
+			'javax.faces.source': session.get("button",None),
+			'javax.faces.partial.execute':'@all',
+			'javax.faces.partial.render': 'form_rcdl:pnl_show form_rcdl:pg_show form_rcdl:rcdl_pnl',
+			session.get("button",None):session.get("button",None),
+			'form_rcdl':'form_rcdl',
+			'form_rcdl:tf_reg_no1': request.form['first'],
+			'form_rcdl:tf_reg_no2': request.form['second'],
+			'form_rcdl:j_idt34:CaptchaID':request.form['captcha'],
+			'javax.faces.ViewState': session.get("viewstate",None)
+			}
+		headers = {
+			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+			'Accept': 'application/xml, text/xml, */*; q=0.01',
+			'Accept-Language': 'en-us',
+			'Accept-Encoding': 'gzip, deflate, br',
+			'Host': 'parivahan.gov.in',
+			'DNT': '1',
+			'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15',
+			'Cookie': 'JSESSIONID=%s; has_js=1' % cookies['JSESSIONID'],
+			'X-Requested-With':'XMLHttpRequest',
+			'Faces-Request':'partial/ajax',
+			'Origin':'https://parivahan.gov.in',
+			'Referer':'https://parivahan.gov.in/rcdlstatus/',
+			'Connection':'keep-alive'
+			# 'User-Agent': 'python-requests/0.8.0',
+			# 'Access-Control-Allow-Origin':'*',
+		}
 
-			command = ['tesseract', input_file, output_file, '-l', request.form['lang'], hocr]
-			proc = subprocess.Popen(command, stderr=subprocess.PIPE)
-			proc.wait()
+		# MARK: Added delay
+		sleep(2.0)
 
-			output_file += ext
-
-			if os.path.isfile(output_file):
-				f = open(output_file)
-				resp = jsonify( {
-				  u'status': 200,
-				  u'ocr':{k:v.decode('utf-8') for k,v in enumerate(f.read().splitlines())}
+		r = requests.post(url=post_url, data=data, headers=headers, cookies=cookies)
+		soup = BeautifulSoup(r.text, 'html.parser')
+		table = SoupStrainer('tr')
+		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
+		resp = jsonify( {
+			u'status': 200,
+			u'details':soup.get_text()
 				} )
-			else:
-				resp = jsonify( {
-				  u'status': 422,
-				  u'message': u'Unprocessable Entity'
-				} )
-				resp.status_code = 422
-
-				shutil.rmtree(folder)
-				return resp
-		else:
-			resp = jsonify( { 
-			u'status': 415,
-			u'message': u'Unsupported Media Type' 
-			} )
-			resp.status_code = 415
-			return resp
-	else:
-		resp = jsonify( { 
-		  u'status': 405, 
-		  u'message': u'The method is not allowed for the requested URL' 
-		} )
-		resp.status_code = 405
 		return resp
