@@ -1,6 +1,6 @@
+:repo:deb http://security.ubuntu.com/ubuntu xenial-security main
 libsm6
 libxrender1
 libfontconfig1
 libice6
-:repo:deb http://ftp.de.debian.org/debian wheezy main
 libpng12-0
