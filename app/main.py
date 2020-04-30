@@ -51,7 +51,7 @@ def home_view():
 	img = Image.open(BytesIO(iresponse.content))
 	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
 	output = StringIO()
-	img.save(output, "JPG")
+	img.save(output, "PNG")
 	contents = output.getvalue().encode("base64")
 	output.close()
 	contents = contents.split('\n')[0]
