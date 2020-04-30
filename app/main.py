@@ -27,13 +27,13 @@ def resolve():
 	return pytesseract.image_to_string(enhancedImage, config=custom_config)
 
 def enhance():
-	img = cv2.imread('/tmp/downloadedpng.png', 0)
+	img = cv2.imread('/tmp/downloadedpng.jpg', 0)
 	kernel = np.ones((2,2), np.uint8)
 	img_erosion = cv2.erode(img, kernel, iterations=1)
 	img_dilation = cv2.dilate(img_erosion, kernel, iterations=1)
 	erosion_again = cv2.erode(img_dilation, kernel, iterations=1)
 	final = cv2.GaussianBlur(erosion_again, (1, 1), 0)
-	cv2.imwrite("Captcha.png",final)
+	cv2.imwrite("Captcha.jpg",final)
 	return final
 
 @app.route("/")
@@ -48,7 +48,7 @@ def home_view():
 	img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
 	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
 	img = Image.open(BytesIO(iresponse.content))
-	img.save(os.path.join("/tmp/","downloadedpng.png"))
+	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	captcha_text = resolve()
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
