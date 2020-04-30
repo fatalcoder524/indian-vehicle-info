@@ -7,6 +7,11 @@
   ],
   "repository": "https://github.com/fatalcoder524/indian-vehicle-info",
   "success_url": "/",
+  "env": {
+    "TESSDATA_PREFIX": {
+      "value": "./.apt/usr/share/tesseract-ocr/4.00/tessdata"
+    }
+  },
   "buildpacks": [
     {
       "url": "heroku/python"
