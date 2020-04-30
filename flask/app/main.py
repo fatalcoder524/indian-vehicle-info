@@ -106,9 +106,10 @@ def result():
 		r = ses.post(url=post_url, data=data, headers=headers,cookies=cookies)
 		soup = BeautifulSoup(r.text, 'html.parser')
 		table = SoupStrainer('table')
+		test = soup.find('table')
 		soup = BeautifulSoup(soup, 'html.parser', parse_only=table)
 		resp = jsonify( {
 			u'status': 200,
 			u'details':soup.get_text()
 				} )
-		return soup
+		return test
