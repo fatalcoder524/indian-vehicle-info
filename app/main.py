@@ -52,7 +52,7 @@ def home_view():
 	button = soup.find("button",{"type": "submit"})	
 	img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
 	session["button"]=button['id']
-	iresponse = session.get("https://parivahan.gov.in"+img_test['src'])
+	iresponse = ses.get("https://parivahan.gov.in"+img_test['src'])
 	img = Image.open(BytesIO(iresponse.content))
 	img.save(os.path.join("/tmp/","downloadedpng.jpg"))
 	buffered = BytesIO(iresponse.content)
