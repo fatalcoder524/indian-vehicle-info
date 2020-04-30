@@ -100,7 +100,7 @@ def result():
 		print(cookies)
 		# MARK: Added delay
 		sleep(2.0)
-		r = ses.post(url=post_url, data=data, headers=headers, cookies=cookies)
+		r = ses.post(url=post_url, data=data, headers=headers)
 		soup = BeautifulSoup(r.text, 'html.parser')
 		table = SoupStrainer('tr')
 		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
