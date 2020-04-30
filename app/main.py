@@ -27,7 +27,7 @@ def resolve():
 	return pytesseract.image_to_string(enhancedImage, config=custom_config)
 
 def enhance():
-	img = cv2.imread('downloadedpng.png', 0)
+	img = cv2.imread('/tmp/downloadedpng.png', 0)
 	kernel = np.ones((2,2), np.uint8)
 	img_erosion = cv2.erode(img, kernel, iterations=1)
 	img_dilation = cv2.dilate(img_erosion, kernel, iterations=1)
@@ -50,10 +50,10 @@ def home_view():
 	img = Image.open(BytesIO(iresponse.content))
 	img.save(os.path.join("/tmp/","downloadedpng.png"))
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
-	# captcha_text = resolve()
-	# extracted_text = captcha_text.replace(" ", "").replace("\n", "")
-	extracted_text ="test4"
-	return render_template("index.html",imglink="/tmp/downloadedpng.png",captchaText=extracted_text)
+	captcha_text = resolve()
+	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
+	#extracted_text ="test4"
+	return render_template("index.html",imglink=img_test['src'],captchaText=extracted_text)
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
