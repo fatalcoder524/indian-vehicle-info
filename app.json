@@ -1,0 +1,17 @@
+{
+  "name": "indian-vehicle-info",
+  "description": "Flask App to find indian vehicle details.",
+  "keywords": [
+    "Tesseract",
+    "OCR"
+  ],
+  "success_url": "/",
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku-community/apt.tgz"
+    }
+  ]
+}
