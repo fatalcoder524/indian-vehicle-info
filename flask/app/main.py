@@ -75,6 +75,10 @@ def home_view():
 def result():
 	global ses
 	if request.method == 'POST':
+		if not request.form['first']:
+			request.form['first']="MH47K"
+		if not request.form['second']:
+			request.form['second']="4272"
 		data = {
 			'javax.faces.partial.ajax':'true',
 			'javax.faces.source': session.get("button",None),
