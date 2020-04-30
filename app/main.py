@@ -53,7 +53,7 @@ def home_view():
 	captcha_text = resolve()
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
 	#extracted_text ="test4"
-	return render_template("index.html",imglink="/tmp/downloadedpng.jpg",captchaText=extracted_text)
+	return render_template("index.html",imglink=img,captchaText=extracted_text)
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
