@@ -26,17 +26,17 @@ def home_view():
 		viewstate = soup.select('input[name="javax.faces.ViewState"]')[0]['value']
 		button = soup.find("button",{"type": "submit"})	
 		img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
-		return """<html>
+		return render_template_string("""<html>
 		<body>
 		<form action = '/result' method = 'POST'>
          <p>Vehicle Reg. No. Part1 <input type = 'text' name = 'first' placeholder='MH47K'/></p>
          <p>Vehicle Reg. No. Part2 <input type = 'text' name = 'second' placeholder='4272'/></p>
-		 <p><img src='https://parivahan.gov.in{{ img_test['src'] }}'></p>
+		 <p><img src='https://parivahan.gov.in{{ imglink }}'></p>
          <p>Captcha <input type = 'text' name = 'captcha' /></p>
          <p><input type = 'submit' value = 'submit' /></p>
       </form>
    </body>
-</html>"""
+</html>""",imglink=img_test['src'])
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
