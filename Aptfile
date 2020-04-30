@@ -3,4 +3,5 @@ libsm6
 libxrender1
 libfontconfig1
 libice6
-libpng12-0
+tesseract-ocr
+tesseract-ocr-eng
