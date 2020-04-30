@@ -50,7 +50,7 @@ def home_view():
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
 	captcha_text = resolve(img)
 	extracted_text = captcha_text.replace(" ", "").replace("\n", "")
-	return render_template("index.html",{imglink="downloadedpng.png",captchaText=extracted_text})
+	return render_template("index.html",imglink="downloadedpng.png",captchaText=extracted_text)
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
