@@ -109,7 +109,6 @@ def result():
 		soup = BeautifulSoup(soup.get_text(), 'html.parser', parse_only=table)
 		resp = jsonify( {
 			u'status': 200,
-			u'details':soup.get_text(),
-			u'details3':test2
+			u'details':soup.get_text()
 				} )
 		return soup
