@@ -42,12 +42,12 @@ def enhance():
 def getCookies():
 	return cookies
 
-def setCookies(cookies):
-	self.cookies=cookies
+def setCookies(cook):
+	global cookies
+	cookies=cook
 
 @app.route("/")
 def home_view():
-	global cookies
 	ses = requests.Session()
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
 	r = ses.get(url=home_url,headers=my_headers)
