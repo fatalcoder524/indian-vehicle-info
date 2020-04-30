@@ -26,7 +26,7 @@ def home_view():
 		viewstate = soup.select('input[name="javax.faces.ViewState"]')[0]['value']
 		button = soup.find("button",{"type": "submit"})	
 		img_test=soup.find("img",{"id": "form_rcdl:j_idt34:j_idt41"})
-		return render_template_string("""<html>
+		return render_template("""<html>
 		<body>
 		<form action = '/result' method = 'POST'>
          <p>Vehicle Reg. No. Part1 <input type = 'text' name = 'first' placeholder='MH47K'/></p>
