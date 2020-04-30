@@ -20,9 +20,6 @@ app = Flask(__name__)
 pytesseract.pytesseract.tesseract_cmd = r'tesseract'
 home_url = 'https://parivahan.gov.in/rcdlstatus/'
 post_url = 'https://parivahan.gov.in/rcdlstatus/vahan/rcDlHome.xhtml'
-
-
-@app.route("/")
 def resolve():
 	enhancedImage = enhance()
 	custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789abcdefghijklmnopqrstuvwxyz'
@@ -37,7 +34,8 @@ def enhance():
 	final = cv2.GaussianBlur(erosion_again, (1, 1), 0)
 	cv2.imwrite("Captcha.png",final)
 	return final
-	
+
+@app.route("/")
 def home_view():
 	session = requests.Session()
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
