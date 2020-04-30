@@ -41,7 +41,6 @@ def enhance():
 
 @app.route("/")
 def home_view():
-	global cookies
 	ses = requests.Session()
 	my_headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15"}
 	r = ses.get(url=home_url,headers=my_headers)
@@ -64,9 +63,10 @@ def home_view():
 	#extracted_text ="test4"
 	return render_template("index.html",imglink="data:image/png;base64,"+img_str.decode("utf-8"),captchaText=extracted_text)
 
-def return_cookies(cookies):
-	return cookies
-
+@app.context_processor
+def global_vars():
+	return dict(cookies=cookies)
+	
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
 	if request.method == 'POST':
@@ -112,7 +112,3 @@ def result():
 			u'details':soup.get_text()
 				} )
 		return resp
-		
-@app.context_processor
-def global_vars():
-	return dict(cookies=return_cookies(cookies))
