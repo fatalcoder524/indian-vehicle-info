@@ -72,6 +72,7 @@ MIT Licence. Copyright (c) 2020 Suraj J Pai
 
 Check Licence file for more information.
 ```
+[Licence](LICENCE)
 
 ## Special Thanks
 
