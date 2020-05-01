@@ -64,7 +64,7 @@ pip install -r requirements.txt
 
 * The app provides a web client `https://your-heroku-app.herokuapp.com/` and `https://your-heroku-app.herokuapp.com/result` will have the result.
 
-* This app is available at https://vehicle-info.herokuapp.com/.
+* This app is available at [https://vehicle-info.herokuapp.com/](https://vehicle-info.herokuapp.com/).
 
 ## Licence
 ```
