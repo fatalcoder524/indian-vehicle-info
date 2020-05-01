@@ -1,5 +1,8 @@
 # indian-vehicle-info
 
+| :warning: | Please read the disclaimer at the end of the file before you proceed. |
+| :---: | :---: |
+
 ## Introduction
 
 With the increasing forgery cases, identity verification via one means or the other has become quite crucial. Therefore, the government and industry regulations make sure that the businesses carry out proper identity authentication of their customers to avoid any kind of identity theft. Vehicles are issued a Registration Certificate (RC) which holds the basic information about the owner and the vehicle itself. Before trusting an individual, we need to check the identity of any individual which can be easily done by Registration Certificate Check. This can be done by authenticating the basic information provided on the RC ensuring that the vehicle is registered with the Regional Transport Office (RTO) authorities and legalizes the owner.
@@ -55,6 +58,30 @@ MIT Licence. Copyright (c) 2020 Suraj J Pai
 @nikhilweee [CODE](https://gist.github.com/nikhilweee/9efd9731880104dd00ecf2ed8effacc5)
 
 @anmolrajpal [REPO](https://github.com/anmolrajpal/vehicle-info)
+
+## Disclaimer
+
+This work is just to test my knowledge on subject matter and is not designed for any commercial or everyday use. This app is not designed for any illigal use. As per the terms and uses of https://parivahan.gov.in/ , it is completly prohibited. Please use this at your own risk.
+
+### Disclaimer of liability
+
+The material and information contained on this repository is for general information purposes only. You should not rely upon the material or information on the website as a basis for making any business, legal or any other decisions.
+
+Whilst we endeavour to keep the information up to date and correct, the author makes no representations or warranties of any kind, express or implied about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services or related graphics contained on the website for any purpose. Any reliance you place on such material is therefore strictly at your own risk.
+
+The author will not be liable for any false, inaccurate, inappropriate or incomplete information presented on the website.
+
+Although every effort is made to keep the website up and running smoothly, due to the nature of the Internet and the technology involved, the author takes no responsibility for and will not be liable for the website being temporarily unavailable due to technical issues (or otherwise) beyond its control or for any loss or damage suffered as a result of the use of or access to, or inability to use or access this website whatsoever.
+
+To the extent not prohibited by law, in no circumstances shall the author be liable to you or any other third parties for any loss or damage (including, without limitation, damage for loss of business or loss of profits) arising directly or indirectly from your use of or inability to use, this site or any of the material contained in it.
+
+### Fair Use Disclaimer
+
+Copyright Disclaimer under section 107 of the Copyright Act 1976, allowance is made for “fair use” for purposes such as criticism, comment, news reporting, teaching, scholarship, education and research.
+
+Fair use is a use permitted by copyright statute that might otherwise be infringing. 
+
+Non-profit, educational or personal use tips the balance in favor of fair use. 
 
 ## Tags
 
