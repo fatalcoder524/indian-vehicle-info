@@ -14,8 +14,8 @@
 | :-------: | :-----------------------------------------------------------------------------------------------------: |
 
 
-| :warning:        | Please read the [disclaimer](../master/README.md#disclaimer) at the end of the file before you proceed.         |
-|:-------------|:------------------|
+| :warning:    | Please read the [disclaimer](../master/README.md#disclaimer) at the end of the file before you proceed.
+|:-------------| :----:
 
 
 ## Introduction
