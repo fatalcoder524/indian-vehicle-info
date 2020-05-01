@@ -10,9 +10,12 @@
 <meta name="revisit-after" content="1 day">
 <meta name="author" content="fatalcoder524">
 
-
-| :warning: | Please read the [disclaimer](../master/README.md#disclaimer) at the end of the file before you proceed. |<br/>
-| :-------: | :-----------------------------------------------------------------------------------------------------: |
+<table>
+  <tr>
+    <th> :warning: </th>
+    <th>Please read the <a href="#disclaimer">disclaimer</a> at the end of the file before you proceed.</th>
+  </tr>
+</table>
 
 
 
