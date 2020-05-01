@@ -1,5 +1,14 @@
 # indian-vehicle-info
 
+![GitHub](https://img.shields.io/github/license/fatalcoder524/indian-vehicle-info)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/fatalcoder524/indian-vehicle-info)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/fatalcoder524/indian-vehicle-info/master)
+![GitHub deployments](https://img.shields.io/github/deployments/fatalcoder524/indian-vehicle-info/vehicle-info)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/fatalcoder524/indian-vehicle-info)
+![GitHub language count](https://img.shields.io/github/languages/count/fatalcoder524/indian-vehicle-info)
+![GitHub repo size](https://img.shields.io/github/repo-size/fatalcoder524/indian-vehicle-info)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fatalcoder524/indian-vehicle-info)
+
 <meta name="title" content="indian-vehicle-info">
 <meta name="google-site-verification" content="5RwvfxhskLEn5yvG-pb1wefMTa_W03rH9JfpljAT0U0" />
 <meta name="description" content="Trace Vehicle Number, Owner Name, Location, address, RTO Registration Number.Vehicle Registration information like location, RTO Code, District, State.">
