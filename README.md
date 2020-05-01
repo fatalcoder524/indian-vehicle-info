@@ -1,5 +1,13 @@
 # indian-vehicle-info
-
+<meta name="title" content="indian-vehicle-info">
+<meta name="google-site-verification" content="5RwvfxhskLEn5yvG-pb1wefMTa_W03rH9JfpljAT0U0" />
+<meta name="description" content="Trace Vehicle Number, Owner Name, Location, address, RTO Registration Number.Vehicle Registration information like location, RTO Code, District, State.">
+<meta name="keywords" content="indian rto api,rto api,indian rto web scrapper,indian vehicle details,indian vehicle details api,indian vehicle registration details,indian vehicle registration details api,indian vehicle registration details web scrapper,vehicle registration details web scrapper,vehicle registration details api,vehicle registration details flask app,indian vehicle registration details flask app,indian rto flask app,indian vehicle details flask app,rto flask app">
+<meta name="robots" content="index, follow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="language" content="English">
+<meta name="revisit-after" content="1 day">
+<meta name="author" content="fatalcoder524">
 | :warning: | Please read the disclaimer at the end of the file before you proceed. |
 | :---: | :---: |
 
