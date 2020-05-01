@@ -1,4 +1,5 @@
 # indian-vehicle-info
+
 <meta name="title" content="indian-vehicle-info">
 <meta name="google-site-verification" content="5RwvfxhskLEn5yvG-pb1wefMTa_W03rH9JfpljAT0U0" />
 <meta name="description" content="Trace Vehicle Number, Owner Name, Location, address, RTO Registration Number.Vehicle Registration information like location, RTO Code, District, State.">
@@ -8,7 +9,8 @@
 <meta name="language" content="English">
 <meta name="revisit-after" content="1 day">
 <meta name="author" content="fatalcoder524">
-| :warning: | Please read the disclaimer at the end of the file before you proceed. |
+
+| :warning: | Please read the [disclaimer](../master/README.md#disclaimer) at the end of the file before you proceed. |
 | :---: | :---: |
 
 ## Introduction
