@@ -65,7 +65,7 @@ Check Licence file for more information.
 
 ## Disclaimer
 
-This work is just to test my knowledge on subject matter and is not designed for any commercial or everyday use. This app is not designed for any illigal use. As per the terms and uses of https://parivahan.gov.in/ , it is completly prohibited. Please use this at your own risk.
+This work is just to test my knowledge on subject matter and is not designed for any commercial or everyday use. This app is not designed for any illegal use. As per the terms and uses of https://parivahan.gov.in/ , it is completly prohibited. Please use this at your own risk.
 
 ### Disclaimer of liability
 
