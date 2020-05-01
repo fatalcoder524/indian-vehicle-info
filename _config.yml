@@ -1,4 +1,26 @@
-theme: jekyll-theme-cayman,
-show_downloads: true,
+theme: jekyll-theme-cayman
+
+show_downloads: true
+
+social-network-links:
+  email: "surajpai524@gmail.com"
+  facebook: fatalcoder524
+  github: fatalcoder524
+  twitter: fatalcoder524
+  reddit: surajpai524
+  linkedin: fatalcoder524
+#  xing: yourname
+  stackoverflow: "11783181/fatalcoder524"
+#  snapchat: deanat78
+  instagram: fatalcoder524
+#  youtube: user/deanat78
+#  spotify: yourname
+#  telephone: +14159998888
+#  steam: deanat78
+#  twitch: yourname
+#  yelp: yourname
+#  telegram: yourname
+#  calendly: yourname
+  
 plugins:
   - jemoji
