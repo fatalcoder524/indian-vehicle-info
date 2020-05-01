@@ -59,12 +59,12 @@ pip install -r requirements.txt
 
 * To find the value for your app, run heroku bash using `heroku run bash` and execute `find -iname tessdata`.Copy this and paste it in Config Vars.
 
-## How to use
-Let us assume you have deployed this app in Heroku and you called it `your-heroku-app`.
+## How to use [Flask App]
+* Let us assume you have deployed this app in Heroku and you called it `your-heroku-app`.
 
-The app provides a web client `https://your-heroku-app.herokuapp.com/` and `https://your-heroku-app.herokuapp.com/result` will have the result.
+* The app provides a web client `https://your-heroku-app.herokuapp.com/` and `https://your-heroku-app.herokuapp.com/result` will have the result.
 
-This app is available at https://vehicle-info.herokuapp.com/.
+* This app is available at https://vehicle-info.herokuapp.com/.
 
 ## Licence
 ```
