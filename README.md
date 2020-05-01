@@ -51,7 +51,11 @@ The app provides a web client `https://your-heroku-app.herokuapp.com/` and `http
 This app is available at https://vehicle-info.herokuapp.com/.
 
 ## Licence
+```
 MIT Licence. Copyright (c) 2020 Suraj J Pai
+
+Check Licence file for more information.
+```
 
 ## Special Thanks
 
